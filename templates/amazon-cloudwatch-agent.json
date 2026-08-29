@@ -1,0 +1,21 @@
+{
+  "agent": {
+    "metrics_collection_interval": 60,
+    "run_as_user": "root"
+  },
+  "logs": {
+    "logs_collected": {
+      "journald": {
+        "units": [
+          {
+            "unit_name": "much-to-do.service",
+            "log_group_name": "/much-to-do/backend",
+            "log_stream_name": "{instance_id}",
+            "retention_in_days": 14
+          }
+        ]
+      }
+    },
+    "force_flush_interval": 15
+  }
+}

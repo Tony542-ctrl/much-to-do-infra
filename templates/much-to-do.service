@@ -1,0 +1,25 @@
+[Unit]
+Description=Much-to-Do Backend API
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=/opt/much-to-do
+ExecStart=/opt/much-to-do/bin/much-to-do
+EnvironmentFile=/opt/much-to-do/.env
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=much-to-do
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/much-to-do/logs
+
+[Install]
+WantedBy=multi-user.target
