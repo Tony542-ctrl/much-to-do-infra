@@ -32,6 +32,8 @@ echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile.d/golang.sh
 mkdir -p "$BIN_DIR" "$LOG_DIR"
 
 # --- Clone and build the backend ---
+export HOME=/root
+export GOMODCACHE=/root/go/pkg/mod
 cd /tmp
 git clone --branch feature/full-stack --depth 1 https://github.com/Innocent9712/much-to-do.git
 cd much-to-do/Server/MuchToDo
