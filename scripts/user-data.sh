@@ -14,7 +14,7 @@ set -euxo pipefail
 APP_DIR="/opt/much-to-do"
 BIN_DIR="$APP_DIR/bin"
 LOG_DIR="$APP_DIR/logs"
-GO_VERSION="1.24.1"
+GO_VERSION="1.25.1"
 
 # --- System Updates ---
 dnf update -y
@@ -46,6 +46,9 @@ git clone --branch feature/full-stack --depth 1 https://github.com/Innocent9712/
 cd much-to-do/Server/MuchToDo
 /usr/local/go/bin/go build -o "$BIN_DIR/much-to-do" ./cmd/api/main.go
 cp -r docs "$APP_DIR/docs" 2>/dev/null || true
+
+# --- Clean up build artifacts to free disk space ---
+rm -rf /tmp/much-to-do /root/go/pkg/mod /tmp/go*.tar.gz
 
 # --- Write environment file ---
 cat > "$APP_DIR/.env" <<'ENVFILE'
