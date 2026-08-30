@@ -20,6 +20,13 @@ GO_VERSION="1.24.1"
 dnf update -y
 dnf install -y git tar gzip
 
+# --- Add swap space (t3.micro has only 1GB RAM, Go build needs more) ---
+dd if=/dev/zero of=/swapfile bs=1M count=2048
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+echo '/swapfile swap swap defaults 0 0' >> /etc/fstab
+
 # --- Install Go ---
 cd /tmp
 curl -LO "https://go.dev/dl/go$${GO_VERSION}.linux-amd64.tar.gz"
